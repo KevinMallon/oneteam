@@ -1,0 +1,103 @@
+<% provide(:title, @employee.name) %>
+<p class="employees">
+  <%= link_to 'Edit Profile', edit_employee_path(@employee) %>
+</p></br>
+    
+<h3>
+    <%= @employee.name %>
+</h3>
+  
+<div>
+  <%= gravatar_for @employee %>
+</div>
+
+<div class="offset2">
+<div class="employees">
+<p>
+    Name:
+    <%= @employee.name %>
+</p>
+
+<p>
+    Email:
+    <%= @employee.email %>
+</p>
+
+<p>
+    Office:
+          <%= @employee.employee_location.location.location_name %>
+</p>
+
+<p>
+    Department:
+    <%= @employee.department %>
+</p>
+
+<p>
+    Group:
+    <%= @employee.group %>
+</p>
+
+<p>
+    Job Title:
+    <%= @employee.job_title %>
+</p>
+
+<p>
+    Immediate Supervisor:
+    <%= @employee.supervisor %>
+</p>
+
+<p>
+    Years with Company:
+    <%= @employee.years_at_company %>
+</p>
+
+<p>Employee Skills:
+<div class="span12">      
+ <table>
+  <tr>  
+    <td class="span2">Skill</td>  
+    <td class="span3">Total Experience Points</td>  
+    <% if current_employee == @employee %>    
+    <td class="span3">Average Skill Rating</td>  
+    <% end %>  
+  </tr><% @skills.each do |skill| %>  
+  <tr>      
+    <td class="span2"><%= skill.name %></td>      
+    <td class="center"><%= @employee.skill_experience_sum(skill.id) %></td>     
+     <% if current_employee == @employee %>        
+     <td class="center"><%= @employee.average_skill_level(skill.id) %></td>      
+     <% end %>    
+   </tr>  
+   <% end %>               
+ </table></br>
+ </div>  
+</p>
+
+<p>Target Skills:
+  <% @skillnames = [] %>            
+    <% @employee.target_skills.each do |targ_skill| %>              
+    <% skill_names(targ_skill) %>            
+    <% end %>            
+    <%= @skillnames.join(", ") %>  
+</p>
+
+<p>
+  <b>Projects I've worked on:</b>
+  <% if !@employee.selections.nil? %>
+    <% @my_projects.each do |my_project| %>
+      <p class="span12">                                
+        <b><em><%= my_project.project %>:</em></b>
+        <%= my_project.start_date %> to 
+        <%= my_project.stop_date %> 
+        (<%= my_project.progress_status %>)
+        <%= my_project.location %> </br>
+        <% my_project.responses.each do |response| %>                    
+        <% end %>
+      </p> 
+    <% end %>     
+  <% end %>
+</p>
+
+

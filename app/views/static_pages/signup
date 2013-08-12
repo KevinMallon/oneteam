@@ -1,0 +1,5 @@
+<% provide(:title, 'Sign Up') %>
+<h1>OneTeam</h1>
+<p>
+  This is the sign-up page for the OneTeam system.
+</p>

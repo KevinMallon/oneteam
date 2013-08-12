@@ -1,0 +1,49 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Requested By:</b>
+  <%= @request.employee.name %>
+</p>
+
+<p>
+  <b>Group:</b>
+  <%= @request.group %>
+</p>
+
+<p>
+  <b>Location:</b>
+          <%= @employee.employee_location.location.location_name %>
+</p>
+
+<p><b>Skills needed:</b>      
+  <% @skillname = [] %>            
+    <% @request.request_skills.each do |skill_need| %>              
+    <% show_skill(skill_need) %>            
+    <% end %>            
+    <%= @skillname.join(", ") %>  
+</p>
+
+<p>
+  <b>Start date:</b>
+  <%= @request.start_date %>
+</p>
+
+<p>
+  <b>Stop date:</b>
+  <%= @request.stop_date %>
+</p>
+
+<p>
+  <b>Request:</b>
+  <%= @request.content %>
+</p>
+
+<p>
+  <b>Project:</b>
+  <%= @request.project %>
+</p>
+
+<p>
+<%= link_to 'To Requests', requests_path %>
+</p>
+ 

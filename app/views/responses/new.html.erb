@@ -1,0 +1,42 @@
+<h1>Respond to this request</h1>
+
+<p>
+  <b>Group:</b>
+  <%= @request.group %>
+</p>
+
+<p>
+  <b>Location:</b>
+  <%= @request.location_id %>
+</p>
+
+<p>
+  <b>Skills needed:</b>
+  <% @request.skills_needed.each do |sn| %>    
+  <%= sn.name %> 
+  <% end %>  
+</p>
+
+<p>
+  <b>Start date:</b>
+  <%= @request.start_date %>
+</p>
+
+<p>
+  <b>Stop date:</b>
+  <%= @request.stop_date %>
+</p>
+
+<p>
+  <b>Request:</b>
+  <%= @request.content %>
+</p>
+
+<p>
+  <b>Project:</b>
+  <%= @request.project %>
+</p>
+
+<%= render 'form' %>
+
+

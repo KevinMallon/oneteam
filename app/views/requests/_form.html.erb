@@ -1,0 +1,78 @@
+<head>
+<meta charset="utf-8" />
+<title>jQuery UI Datepicker - Default functionality</title>
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.1/themes/base/jquery-ui.css" />
+<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+<script src="http://code.jquery.com/ui/1.10.1/jquery-ui.js"></script>
+
+<script>
+$(function() {
+$( "#start_datepicker" ).datepicker();
+$( "#stop_datepicker" ).datepicker();
+});
+</script>
+</head>
+
+
+
+<%= simple_form_for @request do |f|  %>
+
+    <%= f.error_notification %>
+
+    <%= f.check_box :active, :checked => true, :style => 'visibility: hidden' %>
+
+
+    <%= f.input :project %>
+
+    <%= f.input :content, :inline_label => 'Description:', :as => :text, :input_html => {:rows => "3", :class => "span6" } %>
+
+    <%= f.input :start_date, :as => :datepicker %>
+
+    <%= f.input :stop_date, :as => :datepicker %>
+
+    <div class="row-fluid">
+      <div class="span4">
+      <%= f.input :group, as: :select, collection: ['Development','Finance','Marketing'], :label => "Group"  %>
+      </div>
+
+      <div class="span4">
+      <%= f.label :location, 'Office' %>        
+      <%= collection_select(:request, :location_id, @locations, :id, :location_name, :prompt => true) %>
+
+      </div>
+      <div class="span4"></div>
+    </div>
+
+<div class="row-fluid">
+
+  <div class="span2">
+        <%= f.label :skills_needed %></label>
+  </div>
+
+  <div class="span3">
+        <% Skill.all.each do |skill| %>
+              <%= check_box_tag "request[skills_needed_ids][]", skill.id,
+          @request.skills_needed.include?(skill)  %>
+                <%= skill.name %></br>
+        <% end %>
+  </div>
+
+  <div class="span7">
+  </div>  
+
+</div>
+
+<div class="row-fluid">
+<div class="span12">
+</div>
+</div>
+
+<div class="row-fluid">
+<div class="span12">
+  <%= f.button :submit, :class => 'btn-primary' %>
+</div>
+</div>
+
+
+<% end %>
+
