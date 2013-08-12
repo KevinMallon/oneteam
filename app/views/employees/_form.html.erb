@@ -15,7 +15,8 @@
 </div>
 
 <div class="span3">
-  <%= f.input :location_id, as: :select, collection: ['1','2','3','4','5'], :label => "Office" %>  
+  <%= f.label :location, 'Office' %>        
+  <%= collection_select(:employee, :location_id, @locations, :id, :location_name, :prompt => true) %>
 </div>
 
 <div class="span3">

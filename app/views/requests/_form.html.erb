@@ -32,13 +32,12 @@ $( "#stop_datepicker" ).datepicker();
 
     <div class="row-fluid">
       <div class="span4">
-      <%= f.input :group, as: :select, collection: ['Development','Finance','Marketing'], :label => "Group"  %>
+        <%= f.input :group, as: :select, collection: ['Development','Finance','Marketing'], :label => "Group"  %>
       </div>
 
       <div class="span4">
-      <%= f.label :location, 'Office' %>        
-      <%= collection_select(:request, :location_id, @locations, :id, :location_name, :prompt => true) %>
-
+        <%= f.label :location, 'Office' %>        
+        <%= collection_select(:request, :location_id, @locations, :id, :location_name, :prompt => true) %>
       </div>
       <div class="span4"></div>
     </div>

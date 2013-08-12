@@ -9,7 +9,6 @@ class EmployeesController < ApplicationController
     @employees = Employee.paginate(page: params[:page])
     @responses = Response.where('employee_id' => params[:id])
     
-
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @employees }
@@ -36,6 +35,7 @@ class EmployeesController < ApplicationController
   # GET /employees/new.json
   def new
     @employee = Employee.new
+    @locations = Location.all 
 
     respond_to do |format|
       format.html # new.html.erb
@@ -52,6 +52,8 @@ class EmployeesController < ApplicationController
   # POST /employees.json
   def create
     @employee = Employee.new(params[:employee])
+    @locations = Location.all
+    
     respond_to do |format|
       if @employee.save
         flash[:success] = "Welcome to OneTeam! Profile was successfully created."
