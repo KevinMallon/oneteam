@@ -52,12 +52,6 @@ class EmployeeSkillEvaluationsController < ApplicationController
   	end  
   end
 
-  def destroy    @employee_skill_evaluation = EmployeeSkillEvaluation.find(params[:id])    
-  	@employee_skill_evaluation.destroy    
-  	respond_to do |format|      
-  		format.html { redirect_to employee_skill_evaluations_url }      
-  		format.json { head :no_content }    
-  	end  
-  end
+
 
 end
