@@ -24,6 +24,19 @@ namespace :db do
       @tskillpicks
     end
 
+    Employee.create!(name: "Michael Jordan",
+                  email: "mj@bulls.com",
+                  password: "password",
+                  password_confirmation: "password",  
+                  group: "Development", 
+                  location_id: "1",
+                  department: "IT",
+                  supervisor: "Phil Jackson",
+                  years_at_company: "20",
+                  job_title: "UI Specialist",
+                  description: "Greatest ever." )
+
+
     def create_employee (n, location_id)
       name  = Faker::Name.name
       email = Faker::Internet.email
