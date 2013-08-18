@@ -35,7 +35,21 @@ namespace :db do
                   years_at_company: "20",
                   job_title: "UI Specialist",
                   description: "Greatest ever." )
-
+      pick_eskills
+      @eskillpicks.length.times do |n|       
+        EmployeeSkill.create(employee_id: Employee.last.id,                                  
+          skill_id: @eskillpicks[n],                                  
+          level: rand(1..4))
+      end        
+      pick_tskills
+      @tskillpicks.length.times do |n|  
+        TargetSkill.create(employee_id: Employee.last.id,                                  
+          skill_id: @tskillpicks[n],                                  
+          level: rand(1..4))
+      end
+      EmployeeLocation.create!(                          
+          employee_id: Employee.last.id,  
+          location_id: "2") 
 
     def create_employee (n, location_id)
       name  = Faker::Name.name

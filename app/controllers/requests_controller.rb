@@ -16,7 +16,7 @@ class RequestsController < ApplicationController
       @requests = Request.paginate :page =>
        params[:page], :per_page => 10   
     end
-    
+
     @employee = current_employee
     @skills = Skill.all 
     @selections = Selection.where('employee_id' => params[:id])
@@ -26,6 +26,7 @@ class RequestsController < ApplicationController
     location = Location.where('location_id' => params[:id])
     @dashboard = Dashboard.new
   end
+
 
   # GET /requests/1
   # GET /requests/1.json
