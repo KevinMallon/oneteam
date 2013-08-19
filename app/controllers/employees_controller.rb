@@ -36,16 +36,12 @@ class EmployeesController < ApplicationController
   def new
     @employee = Employee.new
     @locations = Location.all 
-
-    respond_to do |format|
-      format.html # new.html.erb
-      format.json { render json: @employee }
-    end
   end
 
   # GET /employees/1/edit
   def edit
       @employee = Employee.find(params[:id])
+      @locations = Location.all
   end
 
   # POST /employees

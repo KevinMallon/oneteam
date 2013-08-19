@@ -12,7 +12,7 @@
 
   <p>Posted by 
     <%= request.employee.name %>
-     in the <%= request.employee.employee_location.location.location_name %> Office (Group: <%= request.employee.group %>) </br>
+     in the <%= request.employee.location.location_name %> Office (Group: <%= request.employee.group %>) </br>
         Description: <%= request.content %></br>
         Relevant skills:      
         <% @skillnames = [] %>            

@@ -8,7 +8,7 @@ class Request < ActiveRecord::Base
 
   validates_presence_of :employee_id
 
-  has_one :location, dependent: :destroy
+  belongs_to :location, dependent: :destroy
   has_many :responses, :dependent => :destroy
   
   has_many :skills, dependent: :destroy, :source => :skill
