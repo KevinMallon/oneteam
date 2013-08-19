@@ -47,9 +47,7 @@ namespace :db do
           skill_id: @tskillpicks[n],                                  
           level: rand(1..4))
       end
-      EmployeeLocation.create!(                          
-          employee_id: Employee.last.id,  
-          location_id: "2") 
+
 
     def create_employee (n, location_id)
       name  = Faker::Name.name
@@ -69,19 +67,16 @@ namespace :db do
                     description: Faker::Lorem.paragraph(sentence_count = 2) )
       pick_eskills
       @eskillpicks.length.times do |n|       
-        EmployeeSkill.create(employee_id: Employee.last.id,                                  
+        EmployeeSkill.create!(employee_id: Employee.last.id,                                  
           skill_id: @eskillpicks[n],                                  
           level: rand(1..4))
       end        
       pick_tskills
       @tskillpicks.length.times do |n|  
-        TargetSkill.create(employee_id: Employee.last.id,                                  
+        TargetSkill.create!(employee_id: Employee.last.id,                                  
           skill_id: @tskillpicks[n],                                  
           level: rand(1..4))
-      end
-      EmployeeLocation.create!(                          
-          employee_id: Employee.last.id,  
-          location_id: location_id)  
+      end 
     end      
 
     def create_selection (response_id)

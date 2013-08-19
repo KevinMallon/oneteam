@@ -67,6 +67,7 @@ class EmployeesController < ApplicationController
   # PUT /employees/1.json
   def update
     @employee = Employee.find(params[:id])
+    @locations = Location.all
 
     respond_to do |format|
       if @employee.update_attributes(params[:employee])
