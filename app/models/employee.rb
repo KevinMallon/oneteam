@@ -17,7 +17,7 @@ class Employee < ActiveRecord::Base
   accepts_nested_attributes_for :employee_skills
   accepts_nested_attributes_for :target_skills
   accepts_nested_attributes_for :requests
-  accepts_nested_attributes_for :location
+
  
   before_save { |employee| employee.email = email.downcase }
   before_save :create_remember_token
