@@ -12,6 +12,17 @@ body {
 
  /* universal */
 
+/* Clearfix to stop our floats escaping */
+#nav pull-right:before, #nav pull-right:after {
+content: "\0020";
+display: block;
+height: 0;
+overflow: hidden;
+}
+#nav pull-right:after {
+clear: both;
+}
+
 $grayMediumLight: #eaeaea;
 $lightGray: #999;
 $grayLight: #999;
