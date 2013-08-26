@@ -26,6 +26,7 @@ namespace :db do
 
     Employee.create!(name: "Michael Jordan",
                   email: "mj@bulls.com",
+                  admin: "1",
                   password: "password",
                   password_confirmation: "password",  
                   group: "Development", 
@@ -56,6 +57,7 @@ namespace :db do
 
       Employee.create!(name: name,
                     email: email,
+                    admin: "0",
                     password: password,
                     password_confirmation: password,  
                     group: ["Development", "Interface Design", "QA", "Infrastructure"].sample.to_s,
