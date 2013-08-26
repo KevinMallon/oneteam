@@ -1,27 +1,15 @@
 @import "bootstrap";
 body { 
-  padding-top: 40px;
+  padding-top: 3em;
   -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
   -moz-box-sizing: border-box;    /* Firefox, other Gecko */
   box-sizing: border-box;         /* Opera/IE 8+ */
   background-attachment: fixed;
   background-size: 100%;
 }
-
-
+@import "bootstrap-responsive";
 
  /* universal */
-
-/* Clearfix to stop our floats escaping */
-#nav pull-right:before, #nav pull-right:after {
-content: "\0020";
-display: block;
-height: 0;
-overflow: hidden;
-}
-#nav pull-right:after {
-clear: both;
-}
 
 $grayMediumLight: #eaeaea;
 $lightGray: #999;
@@ -29,16 +17,9 @@ $grayLight: #999;
 $grayLighter: #999;
 $grayDarker: #999; 
 
-
-
 .center {
   text-align: center;
 }
-
-.center h1 {
-  margin-bottom: 10px;
-}
-
 
 /* typography */
 
