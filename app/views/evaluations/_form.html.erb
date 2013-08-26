@@ -18,8 +18,8 @@
 <table>
     <tr>
       <td class="span2"></th>
-      <td class="span4">Level</th>
-      <td class="span2">Experience</th>
+      <td class="span3">Level</th>
+      <td class="span1">Experience</th>
     </tr>         
   <% Skill.all.each do |skill| %>
     <% @response.request.request_skills.each do |skill_need| %>
@@ -30,7 +30,7 @@
               <%= skill.name %> 
             </td>
                    
-            <td class="span4">
+            <td class="span3">
               <% [0,1,2,3,4].each do |level| %>
           
                  <%= radio_button_tag "evaluation[evaluated_skills][][#{skill.id}][level]", "#{level}", @evaluation.existing_skill_level?(skill.id, level) %>
@@ -38,13 +38,14 @@
               <% end %>
             </td>
 
-            <td class="span2">
+            <td class="span1">
               <%= select_tag "evaluation[evaluated_skills][][#{skill.id}][skill_experience]", options_for_select((0..@request.proj_length), 
               @evaluation.previous_experience_points(skill.id)) 
               %>
             </td>
-
-          </tr>                           
+            
+          </tr>
+          </br>                           
         <% end %>  
       <% end %> 
     <% end %> 
