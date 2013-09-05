@@ -57,7 +57,7 @@ namespace :db do
 
       Employee.create!(name: name,
                     email: email,
-                    admin: "0",
+                    admin: "",
                     password: password,
                     password_confirmation: password,  
                     group: ["Development", "Interface Design", "QA", "Infrastructure"].sample.to_s,

@@ -1,8 +1,19 @@
 <% provide(:title, @employee.name) %>
+<!DOCTYPE html>
+<html>
+<head>
+</head> 
+
+<body> 
+
 <p class="employees">
   <%= link_to 'Edit Profile', edit_employee_path(@employee) %>
 </p></br>
     
+<h3>
+    <%= @employee.name %>
+</h3>
+
 <h3>
     <%= @employee.name %>
 </h3>
@@ -13,10 +24,6 @@
 
 
 <div class="employees">
-<p>
-    Name:
-    <%= @employee.name %>
-</p>
 
 <p>
     Email:
@@ -100,3 +107,5 @@
 </p>
 </div>
 
+</body>
+</html>

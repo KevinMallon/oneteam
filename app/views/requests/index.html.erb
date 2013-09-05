@@ -1,55 +1,93 @@
 <!DOCTYPE html>
 <html>
-
+<head>
+  <script type="text/javascript">
+    function seeCookie(){
+    if(document.cookie == "") {
+      document.write("No cookies");
+    }
+    else{
+      var cookiestr=""
+      var myCookie = document.cookie.split("; ");
+      for(var i=0;i<myCookie.length; i++){
+      cookiestr+=myCookie[i] + " ";
+      var cookieData=myCookie[i].split("=");        
+      document.write("Cookie: " + cookiestr);
+      }
+      }
+    }
+  </script> 
+<!--  <script type="text/javascript">
+    function showPosition(event) {
+      var elt = document.getElementById("location");
+      elt.textContent ="Latitude: " + position.coords.latitude + 
+    "<br>Longitude: " + position.coords.longitude;  
+    }
+  </script> -->
+</head> 
 <body> 
 
   <div id="tabs-1">
 
-      <ul class="employees">
+    <ul class="employees">
     
-<% Request.all.each do |request| %>
-  <% if request.employee != current_employee %>           
-  <% if Date.today < request.stop_date %>
+    <% Request.all.each do |request| %>
+      <% if request.employee != current_employee %>           
+      <% if Date.today < request.stop_date %>
 
-  <p><b><%= request.project %>:</b> <%= request.start_date %> to <%= request.stop_date %> (Status: <%= request.progress_status %>) </br>
+      <div id="location">
+      <p><b><%= request.project %>:</b> <%= request.start_date %> to <%= request.stop_date %> (Status: <%= request.progress_status %>) </br>
 
-  <p>Posted by 
-    <%= request.employee.name %>
-     in the <%= request.employee.location.location_name %> Office (Group: <%= request.employee.group %>) </br>
-        Description: <%= request.content %></br>
-        Relevant skills:      
-        <% @skillnames = [] %>            
-        <% request.request_skills.each do |skill_need| %>
-          <% skill_names(skill_need) %>            
-        <% end %>            
-        <%= @skillnames.join(", ") %> 
-      </p>  
+      <p>Posted by 
+        <%= request.employee.name %>
+         in the <%= request.employee.location.location_name %> Office (Group: <%= request.employee.group %>) </br>
+            Description: <%= request.content %></br>
+            Relevant skills:      
+            <% @skillnames = [] %>            
+            <% request.request_skills.each do |skill_need| %>
+              <% skill_names(skill_need) %>            
+            <% end %>            
+            <%= @skillnames.join(", ") %> 
+          </p>  
 
-      <p>
-        Your <em>employee skills</em> score for this project: <%= request.employee_skills_score(current_employee) %> out of a possible <%= request.request_max_score(request) %></br>            
-        Your <em>target skills</em> score for this project: <%= request.target_skills_score(current_employee) %> out of a possible <%= request.request_max_score(request) %></br>
-      </p>
+          <p>
+            Your <em>employee skills</em> score for this project: <%= request.employee_skills_score(current_employee) %> out of a possible <%= request.request_max_score(request) %></br>            
+            Your <em>target skills</em> score for this project: <%= request.target_skills_score(current_employee) %> out of a possible <%= request.request_max_score(request) %></br>
+          </p>
 
-      <p>
-        <% if request.applied_status(current_employee) == "applied" %>
-             Applied
-        <% elsif request.employee != current_employee %>
-             <%= link_to "Apply", new_request_response_path(request), class: "btn" %>
-        <% elsif request.employee == current_employee %>
-             <span class="attention">You posted this request. You cannot apply for your own requests.</span>
-        <% end %>
-  
-  <hr>
+          <p>
+            <% if request.applied_status(current_employee) == "applied" %>
+                 Applied
+            <% elsif request.employee != current_employee %>
+                 <%= link_to "Apply", new_request_response_path(request), class: "btn" %>
+            <% elsif request.employee == current_employee %>
+                 <span class="attention">You posted this request. You cannot apply for your own requests.</span>
+            <% end %>
+      <div>
+      <hr>
 
-<% end %>
-<% end %>
-<% end %>
+    <% end %>
+    <% end %>
+    <% end %>
 
   </ul>    
   </div>
+  <div id="myLocation"></div>
 
+  <script>
+    document.getElementById("myLocation").textContent = seeCookie();
+  </script>
 
+<!--     // <script>
+    //   if (navigator.geolocation)
+    //     {
+    //     document.getElementById("myLocation").textContent = getCurrentLocation();
+    //     }
+    //   else{elt.textContent="Geolocation is not supported by this browser.";}
+    // </script>
+ -->
 
+    <!-- <script type="text/javascript" charset="utf-8" src="../javascripts/geolocation.js"></script> -->
 
 </body>
 </html>

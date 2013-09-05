@@ -1,8 +1,8 @@
 class SessionsController < ApplicationController
 
-
-  def new
-  end
+def action
+  @lat_lng = cookies[:lat_lng].split("|")
+end
 
 def create
   employee = Employee.find_by_email(params[:session][:email].downcase)

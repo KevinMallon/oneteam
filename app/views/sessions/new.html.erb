@@ -4,6 +4,12 @@
 <html>
   <head>
     <meta name="viewport" content="width=device-width, minimum-scale=0.5, maximum-scale=2">
+    <script type="text/javascript">
+      function savePosition(position) {
+        var cookie_val = position.coords.latitude + "|" + position.coords.longitude;
+        document.cookie = "lat_lng=" + escape(cookie_val);
+      }
+    </script>
     <!--[if lt IE 9]>
     <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
@@ -21,11 +27,18 @@
       <%= f.label :password %>
       <%= f.password_field :password %>
 
-      <p><%= f.submit "Sign in", class: "btn btn-large btn-primary" %></p>
+      <p><%= f.submit "Sign in", class: "btn btn-large btn-primary locate-me" %></p>
     <% end %>
     
     <p>New user? <%= link_to "Sign up now!", signup_path %></p>
 
   </div>
+
+    <script>
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(savePosition);
+      }
+      else{elt.textContent="Geolocation is not supported by this browser.";}
+    </script>
   </body>
 </html>
