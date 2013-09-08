@@ -17,6 +17,14 @@
       }
     }
   </script> 
+
+  <script type="text/javascript">
+    function getCookie(lat_lng) {
+      var parts = document.cookie.split(name + "=");
+      if (parts.length == 2) return parts.pop().split(";").shift();
+    }
+  </script>
+
 <!--  <script type="text/javascript">
     function showPosition(event) {
       var elt = document.getElementById("location");
@@ -34,13 +42,14 @@
     <% Request.all.each do |request| %>
       <% if request.employee != current_employee %>           
       <% if Date.today < request.stop_date %>
+      <% if request.distance_from_request(@current_position, request.location_id) <= 250 %> 
 
       <div id="location">
       <p><b><%= request.project %>:</b> <%= request.start_date %> to <%= request.stop_date %> (Status: <%= request.progress_status %>) </br>
 
       <p>Posted by 
         <%= request.employee.name %>
-         in the <%= request.employee.location.location_name %> Office (Group: <%= request.employee.group %>) </br>
+         in the <%= request.employee.location.location_name %> Office, <%= request.distance_from_request(@current_position, request.location_id) %> miles away (Group: <%= request.employee.group %>) </br>
             Description: <%= request.content %></br>
             Relevant skills:      
             <% @skillnames = [] %>            
@@ -66,6 +75,7 @@
       <div>
       <hr>
 
+    <% end %>
     <% end %>
     <% end %>
     <% end %>

@@ -2,14 +2,15 @@
 Skill.find_or_create_by_name(skill)
 end
 
-["Chicago", "Boston", "Houston", "San Francisco", "London", "Mumbai"].each do |loc|
-Location.find_or_create_by_location_name(loc)
-end
+location_list = [
+  [ "Chicago", 41.8819, -87.6278 ],
+  [ "Boston", 42.3581, -71.0636 ],
+  [ "Houston", 29.7628, -95.3831 ],
+  [ "San Francisco", 37.7833, -122.4167 ],
+  [ "London", 51.5072, -0.1275 ],
+  [ "Mumbai", 18.9750, 72.8258 ]
+]
 
-["41.8819", "42.3581", "29.7628", "37.7833", "51.5072", "18.9750"].each do |latitude|
-Location.find_or_create_by_latitude(latitude)
-end
-
-["-87.6278", "-71.0636", "-95.3831", "-122.4167", "-0.1275", "72.8258"].each do |longitude|
-Location.find_or_create_by_longitude(longitude)
+location_list.each do |location_name, latitude, longitude|
+  Location.create( location_name: location_name, latitude: latitude, longitude: longitude)
 end
