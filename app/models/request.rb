@@ -116,22 +116,22 @@ class Request < ActiveRecord::Base
     distance_from_request
   end
 
-  def within_range
-    in_range_requests = []
-    Request.all.each do |request|
-      location_id = request.location_id
-      latitude = Location.find_by_id(location_id).latitude
-      longitude = Location.find_by_id(location_id).longitude
-      city_coordinates = []
-      city_coordinates.push(latitude)
-      city_coordinates.push(longitude)
-      distance_from_request = Haversine.distance(@current_position, city_coordinates).to_miles.to_i
-      if distance_from_request <= 50
-        in_range_requests.push(request)
-      end
-    end
-    in_range_requests  
-  end
-
+  # def within_range
+  #   in_range_requests = []
+  #   Request.all.each do |request|
+  #     location_id = request.location_id
+  #     latitude = Location.find_by_id(location_id).latitude
+  #     longitude = Location.find_by_id(location_id).longitude
+  #     city_coordinates = []
+  #     city_coordinates.push(latitude)
+  #     city_coordinates.push(longitude)
+  #     distance_from_request = Haversine.distance(@current_position, city_coordinates).to_miles.to_i
+  #     if distance_from_request <= 50
+  #       @in_range_requests.push(request)
+  #     end
+  #   end
+  #   in_range_requests  
+  # end
+  
 end
 

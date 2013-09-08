@@ -58,15 +58,15 @@ p {
   line-height: 1.2em;
 }
 
+#hilight {
+  color: red;
+  }
+
 a
 {
   color:blue;
   text-decoration:underline;
 }
-
-.attention {
-  color: red;
-  }
 
 /* header */
 
@@ -136,6 +136,9 @@ aside {
 .employees {
   list-style: none;
   margin: 0;
+  #hilight {
+  color: red;
+  }
   a {
         color:blue;
         text-decoration:underline;
