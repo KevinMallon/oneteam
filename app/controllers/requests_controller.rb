@@ -17,23 +17,6 @@ class RequestsController < ApplicationController
        params[:page], :per_page => 10   
     end
 
-  def within_range
-    @in_range_requests = []
-    Request.all.each do |request|
-      location_id = request.location_id
-      latitude = Location.find_by_id(location_id).latitude
-      longitude = Location.find_by_id(location_id).longitude
-      city_coordinates = []
-      city_coordinates.push(latitude)
-      city_coordinates.push(longitude)
-      distance_from_request = Haversine.distance(@current_position, city_coordinates).to_miles.to_i
-      if distance_from_request <= 50
-        @in_range_requests.push(request)
-      end
-    end
-    @in_range_requests  
-  end
-
     @employee = current_employee
     @skills = Skill.all 
     @selections = Selection.where('employee_id' => params[:id])
