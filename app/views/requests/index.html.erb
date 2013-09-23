@@ -1,45 +1,102 @@
 <!DOCTYPE html>
 <html>
-<head>
-</head> 
+<head>  
+
+  <!-- <script src="//code.jquery.com/jquery-latest.js"></script>
+  <script>
+  $(document).ready(function () {
+    /*
+     * check browser supports local storage
+     */
+    if (localStorage) {
+      localStorage.clear();
+      setSummary = document.getElementById('summary');
+      setSummary.onclick = function() {
+          if(document.getElementById('summary').setAttribute('checked','checked')) {
+              localStorage.setItem('summary', "true");
+          } else {
+              localStorage.setItem('summary', "false");
+          }
+      }
+    }   
+    });
+  </script> -->
+
+
+  <script>
+   
+   $(function () {
+    $('#summary').change(function () {               
+       $('.request_info').toggle(!this.checked);
+       localStorage.setItem('summary', "" + this.checked)
+    }); 
+    
+      if (localStorage.getItem('summary') == "true") {
+          document.getElementById("summary").setAttribute('checked','checked');
+       
+         $('.request_info').toggle();
+      }
+  });
+  </script> 
+
+  <script type="text/javascript">
+      /*function to toggle visibility of class*/
+    function toggle_visibility(classname) { $(".request_info").toggle();  
+    }
+  </script>
+</head>
+
 <body> 
 
   <div id="tabs-1">
 
+  <label>
+    <input id="summary" type="checkbox">
+    Titles Only 
+  </label></br>
+
     <ul class="employees">
-    
+
     <% Request.all.each do |request| %>
       <% if request.employee != current_employee %>           
       <% if Date.today < request.stop_date %>
 
       <div>
-      <p><% if request.distance_from_request(@current_position, request.location_id) <= 50 %><span id="hilight">NEARBY! </span><% end %><b><%= request.project %>:</b> <%= request.start_date %> to <%= request.stop_date %> (Status: <%= request.progress_status %>) </br>
+        <div id="request">
+        <p>
+          <% if request.distance_from_request(@current_position, request.location_id) <= 250 %>
+            <span id="hilight">NEARBY! </span>
+          <% end %>
+          <b><%= request.project %>:</b> <%= request.start_date %> to <%= request.stop_date %> (Status: <%= request.progress_status %>) </br>
+        
+        <div class="request_info">
+        <p>Posted by 
+          <%= request.employee.name %>
+           in the <%= request.employee.location.location_name %> Office, <%= request.distance_from_request(@current_position, request.location_id) %> miles away (Group: <%= request.employee.group %>) </br>
+              Description: <%= request.content %></br>
+              Relevant skills:      
+              <% @skillnames = [] %>            
+              <% request.request_skills.each do |skill_need| %>
+                <% skill_names(skill_need) %>            
+              <% end %>            
+              <%= @skillnames.join(", ") %> 
+        </p>  
 
-      <p>Posted by 
-        <%= request.employee.name %>
-         in the <%= request.employee.location.location_name %> Office, <%= request.distance_from_request(@current_position, request.location_id) %> miles away (Group: <%= request.employee.group %>) </br>
-            Description: <%= request.content %></br>
-            Relevant skills:      
-            <% @skillnames = [] %>            
-            <% request.request_skills.each do |skill_need| %>
-              <% skill_names(skill_need) %>            
-            <% end %>            
-            <%= @skillnames.join(", ") %> 
-          </p>  
+        <p>
+          Your <em>employee skills</em> score for this project: <%= request.employee_skills_score(current_employee) %> out of a possible <%= request.request_max_score(request) %></br>            
+          Your <em>target skills</em> score for this project: <%= request.target_skills_score(current_employee) %> out of a possible <%= request.request_max_score(request) %></br>
+        </p>
 
-          <p>
-            Your <em>employee skills</em> score for this project: <%= request.employee_skills_score(current_employee) %> out of a possible <%= request.request_max_score(request) %></br>            
-            Your <em>target skills</em> score for this project: <%= request.target_skills_score(current_employee) %> out of a possible <%= request.request_max_score(request) %></br>
-          </p>
-
-          <p>
-            <% if request.applied_status(current_employee) == "applied" %>
-                 Applied
-            <% elsif request.employee != current_employee %>
-                 <%= link_to "Apply", new_request_response_path(request), class: "btn" %>
-            <% elsif request.employee == current_employee %>
-                 <span class="attention">You posted this request. You cannot apply for your own requests.</span>
-            <% end %>
+        <p>
+          <% if request.applied_status(current_employee) == "applied" %>
+               Applied
+          <% elsif request.employee != current_employee %>
+               <%= link_to "Apply", new_request_response_path(request), class: "btn" %>
+          <% elsif request.employee == current_employee %>
+               <span class="attention">You posted this request. You cannot apply for your own requests.</span>
+          <% end %>
+        </div>
+        </div>
       <div>
       <hr>
 
@@ -49,17 +106,6 @@
 
   </ul>    
   </div>
-
-<!--     // <script>
-    //   if (navigator.geolocation)
-    //     {
-    //     document.getElementById("myLocation").textContent = getCurrentLocation();
-    //     }
-    //   else{elt.textContent="Geolocation is not supported by this browser.";}
-    // </script>
- -->
-
-    <!-- <script type="text/javascript" charset="utf-8" src="../javascripts/geolocation.js"></script> -->
 
 </body>
 </html>
